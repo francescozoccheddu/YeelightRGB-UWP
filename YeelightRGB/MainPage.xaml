@@ -8,7 +8,120 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Page.Resources>
+        <Thickness x:Key="ControlMargin">4</Thickness>
+    </Page.Resources>
 
-    </Grid>
+    <SplitView DisplayMode="Inline" IsPaneOpen="True">
+
+        <SplitView.Pane>
+            <RelativePanel>
+
+                <ListView RelativePanel.AlignTopWithPanel="True"
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.AlignRightWithPanel="True"
+                          RelativePanel.Above="ListCommandBar">
+
+                    <TextBlock Text="List Item #1"/>
+                    <TextBlock Text="List Item #2"/>
+                    <TextBlock Text="List Item #3"/>
+                    <TextBlock Text="List Item #4"/>
+                    <TextBlock Text="List Item #5"/>
+                    <TextBlock Text="List Item #6"/>
+                    <TextBlock Text="List Item #7"/>
+                    <TextBlock Text="List Item #8"/>
+                    <TextBlock Text="List Item #9"/>
+                    <TextBlock Text="List Item #10"/>
+                    <TextBlock Text="List Item #11"/>
+                </ListView>
+                <CommandBar Name="ListCommandBar"
+                            DefaultLabelPosition="Right"
+                            RelativePanel.AlignBottomWithPanel="True" 
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignRightWithPanel="True">
+                    <AppBarButton Icon="Refresh" Label="Rescan"/>
+                    <AppBarButton Icon="Add" Label="Add"/>
+                </CommandBar>
+
+            </RelativePanel>
+        </SplitView.Pane>
+
+        <SplitView.Content>
+
+            <ScrollViewer>
+                <StackPanel Margin="4">
+
+                    <TextBox
+                        Name="ContentTitle"
+                        HorizontalAlignment="Left"
+                        Margin="{StaticResource ControlMargin}"
+                        Width="Auto"
+                        Text="Yeelight #0"/>
+
+                    <TextBlock 
+                        Text="Bulb state" 
+                        Margin="{StaticResource ControlMargin}"/>
+
+                    <ToggleSwitch
+                        Name="Lit"
+                        Margin="{StaticResource ControlMargin}"
+                        OnContent="On"
+                        OffContent="Off"/>
+
+                    <ColorPicker 
+                        HorizontalAlignment="Left"
+                        Margin="{StaticResource ControlMargin}"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.Below="ContentTitle"
+                        ColorSpectrumShape="Ring"
+                        IsHexInputVisible="False"
+                        IsAlphaEnabled="False"
+                        IsColorChannelTextInputVisible="False"/>
+
+                    <GridView
+                        Margin="{StaticResource ControlMargin}">
+                        <GridView.ItemTemplate>
+                            <DataTemplate x:DataType="SolidColorBrush">
+                                <Rectangle Width="40" Height="40">
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="{x:Bind Color}" />
+                                    </Rectangle.Fill>
+                                    <Rectangle.ContextFlyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem>Replace with current</MenuFlyoutItem>
+                                        </MenuFlyout>
+                                    </Rectangle.ContextFlyout>
+                                </Rectangle>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <SolidColorBrush Color="Red"/>
+                        <SolidColorBrush Color="Green"/>
+                        <SolidColorBrush Color="Yellow"/>
+                        <SolidColorBrush Color="Blue"/>
+                    </GridView>
+
+                    <TextBlock 
+                        Text="Pin to the notification area"
+                        Margin="{StaticResource ControlMargin}"/>
+
+                    <ToggleSwitch
+                        Name="PinnedToSystemTray"
+                        Margin="{StaticResource ControlMargin}"/>
+
+                    <TextBlock 
+                        Text="Start at system startup"
+                        Margin="{StaticResource ControlMargin}"/>
+
+                    <ToggleSwitch 
+                        Margin="{StaticResource ControlMargin}"/>
+
+
+
+                </StackPanel>
+            </ScrollViewer>
+
+        </SplitView.Content>
+
+    </SplitView>
+
 </Page>
